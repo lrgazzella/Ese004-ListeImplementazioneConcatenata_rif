@@ -103,7 +103,7 @@ int LLFindKey(LLElement *first, int key, int startPosition, int *position) {
     }
     
     return -1;
-}
+} //0
 
 /*
  * Remove the first element of the list.
@@ -112,9 +112,20 @@ int LLFindKey(LLElement *first, int key, int startPosition, int *position) {
  * Returns -1 in csae of empty list.
  */
 int LLRemoveFirst(LLElement **first) {
-    // TODO Implementation needed
-    return -1;
-}
+    
+    LLElement * ultimo = NULL;
+    
+    if(*first != NULL){
+        ultimo = *first;
+        *first = (*first)->next;
+        free(ultimo);
+        return 0;
+    }else{
+        printf("La lista è vuota \n");
+        return -1;
+    }
+   
+} //0
 
 /*
  * Remove the last element of the list.
@@ -146,6 +157,15 @@ int LLRemoveAtPosition(LLElement **first, int position) {
  * Return -1 in case of emtpy list. 
  */
 int LLEmptyList(LLElement **first) {
-    // TODO Implementation needed
+    
+    
+    LLElement *elimina;
+    while(*first != NULL) {
+        elimina = *first;
+        *first = (*first)->next;
+        free(elimina);
+        return 0;
+    }
     return -1;
-}
+    
+} //0
