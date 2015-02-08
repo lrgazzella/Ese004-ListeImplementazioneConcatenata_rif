@@ -28,9 +28,26 @@ int LLInsertAtBeginning(LLElement **first, int key) {
  * Return -1 if memory allocation fails.
  */
 int LLInsertAtEnd(LLElement **first, int key) {
-    // TODO Implementation needed
-    return -1;
-}
+    
+    LLElement * nuovo;
+    nuovo = (LLElement *)malloc(sizeof(LLElement));
+    
+    LLElement **scorri;
+    scorri = first;
+    if(nuovo != NULL){
+
+        while((*scorri) != NULL){
+            scorri = &((*scorri)->next);
+        }
+        nuovo->next = NULL;
+        nuovo->key = key;
+        *scorri = nuovo;
+    }else{
+        return -1;
+    }
+    
+    return 0;
+} //0
 
 /*
  * Inserts the new key at the specified positon of the list.
@@ -41,9 +58,27 @@ int LLInsertAtEnd(LLElement **first, int key) {
  * Return -1 if memory allocation fails.
  */
 int LLInsertAtPosition(LLElement **first, int key, int position) {
-    // TODO Implementation needed
-    return -1;
-}
+    
+    LLElement * nuovo;
+    nuovo = (LLElement *)malloc(sizeof(LLElement));
+    
+    LLElement ** scorri;
+    scorri = first;
+    int i;
+    
+    if(nuovo != NULL){
+        for(i=0; i<position ; i++){
+            scorri = &((*scorri)->next);
+        }
+        nuovo->next = *scorri;
+        nuovo->key = key;
+        *scorri = nuovo; 
+    }else{
+        return -1;
+    }
+    return 0;
+    
+} //0
 
 /*
  * Returns the size of the list.
@@ -134,8 +169,21 @@ int LLRemoveFirst(LLElement **first) {
  * Returns -1 in csae of empty list.
  */
 int LLRemoveLast(LLElement **first) {
-    // TODO Implementation needed
-    return -1;
+    
+    LLElement **scorri;
+    
+    if(*first != NULL){
+        scorri = first;
+        while((*scorri)->next != NULL){
+            scorri = &((*scorri)->next);
+        }
+        free(*scorri);
+        *scorri = NULL;
+        return 0;
+    }
+    
+    return 1;
+    
 }
 
 /*
@@ -147,7 +195,26 @@ int LLRemoveLast(LLElement **first) {
  * Returns -1 in case it does not exist any element at the specified position
  */
 int LLRemoveAtPosition(LLElement **first, int position) {
-    // TODO Implementation needed
+    
+    LLElement ** scorri;
+    LLElement * elimina;
+    
+    int i;
+    
+    if(*first != NULL){
+        scorri = first;
+        for(i=0; i<position && *scorri!=NULL; i++){
+            scorri = &((*scorri)->next);
+        }
+        
+        if(*scorri != NULL){
+            elimina = *scorri;
+            *scorri = (*scorri)->next;
+        }
+        
+        free( elimina );
+        return 0;
+    }
     return -1;
 }
 
