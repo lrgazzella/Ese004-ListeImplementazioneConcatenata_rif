@@ -158,7 +158,6 @@ int LLRemoveFirst(LLElement **first) {
         free(ultimo);
         return 0;
     }else{
-        printf("La lista è vuota \n");
         return -1;
     }
    
@@ -229,13 +228,16 @@ int LLEmptyList(LLElement **first) {
     
     
     LLElement *elimina;
-    
-    while(*first != NULL) {
-        elimina = *first;
-        *first = (*first)->next;
-        free(elimina);
+    if(*first != NULL){
+        while(*first != NULL) {
+            elimina = *first;
+            *first = (*first)->next;
+            free(elimina);
+            
+        } 
         return 0;
     }
+    
     return -1;
     
-} //0
+} //-1
