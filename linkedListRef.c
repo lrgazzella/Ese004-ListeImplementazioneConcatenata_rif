@@ -7,9 +7,20 @@
  * Return -1 if memory allocation fails.
  */
 int LLInsertAtBeginning(LLElement **first, int key) {
-    // TODO Implementation needed
-    return -1;
-}
+    
+    LLElement * nuovo;
+    nuovo = (LLElement *)malloc(sizeof(LLElement));
+    
+    if(nuovo != NULL){
+        nuovo->next = *first;
+        nuovo->key = key;
+        *first = nuovo;
+    }else{
+        return -1;
+    }
+    
+    return 0;
+} //0
 
 /*
  * Inserts the new key at the end of the list.
@@ -38,9 +49,15 @@ int LLInsertAtPosition(LLElement **first, int key, int position) {
  * Returns the size of the list.
  */
 int LLSize(LLElement *first) {
-    // TODO Implementation needed
-    return -1;
-}
+    int size = 0;
+       
+    while(first != NULL){
+        size++;
+        first = first->next;
+    }
+    
+    return size;
+} //-1
 
 /*
  * Gives the key at the specified position. * 
@@ -49,9 +66,19 @@ int LLSize(LLElement *first) {
  * Returns -1 if there is no key at the specified position
  */ 
 int LLGetKey(LLElement *first, int position, int *key) {
-    // TODO Implementation needed
+    int i;
+
+    for(i=0; i<position ; i++){
+        first = first->next;
+    }
+    
+    if(first != NULL){
+        *key = first->key;
+        return 0;
+    }
+    
     return -1;
-}
+} //0
 
 /*
  * Gives the position of the first element, starting from startPosition, that
@@ -61,7 +88,20 @@ int LLGetKey(LLElement *first, int position, int *key) {
  * Returns -1 if not found. 
  */ 
 int LLFindKey(LLElement *first, int key, int startPosition, int *position) {
-    // TODO Implementation needed
+    
+    for(*position=0 ; *position<startPosition ; *position++){
+        first = first->next;
+    }
+    
+    while(first != NULL){
+        if(first->key == key){
+            return 0;
+        }else{
+            first = first->next;
+            *position++;
+        }
+    }
+    
     return -1;
 }
 
