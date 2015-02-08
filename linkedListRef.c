@@ -20,7 +20,7 @@ int LLInsertAtBeginning(LLElement **first, int key) {
     }
     
     return 0;
-} //0
+} //-1
 
 /*
  * Inserts the new key at the end of the list.
@@ -47,7 +47,7 @@ int LLInsertAtEnd(LLElement **first, int key) {
     }
     
     return 0;
-} //0
+} //-1
 
 /*
  * Inserts the new key at the specified positon of the list.
@@ -78,7 +78,7 @@ int LLInsertAtPosition(LLElement **first, int key, int position) {
     }
     return 0;
     
-} //0
+} //-1
 
 /*
  * Returns the size of the list.
@@ -103,7 +103,7 @@ int LLSize(LLElement *first) {
 int LLGetKey(LLElement *first, int position, int *key) {
     int i;
 
-    for(i=0; i<position ; i++){
+    for(i=0; ((i<position) && (first!=NULL)) ; i++){
         first = first->next;
     }
     
@@ -113,7 +113,7 @@ int LLGetKey(LLElement *first, int position, int *key) {
     }
     
     return -1;
-} //0
+} //-1
 
 /*
  * Gives the position of the first element, starting from startPosition, that
@@ -123,22 +123,24 @@ int LLGetKey(LLElement *first, int position, int *key) {
  * Returns -1 if not found. 
  */ 
 int LLFindKey(LLElement *first, int key, int startPosition, int *position) {
+    int i;
     
-    for(*position=0 ; *position<startPosition ; *position++){
+    for(i=0 ; ((i<startPosition) && (first!=NULL)) ; i++){
         first = first->next;
     }
     
     while(first != NULL){
         if(first->key == key){
+            *position = i;
             return 0;
         }else{
             first = first->next;
-            *position++;
+            i++;
         }
     }
     
     return -1;
-} //0
+} //-1
 
 /*
  * Remove the first element of the list.
@@ -160,7 +162,7 @@ int LLRemoveFirst(LLElement **first) {
         return -1;
     }
    
-} //0
+} //-1
 
 /*
  * Remove the last element of the list.
@@ -182,9 +184,9 @@ int LLRemoveLast(LLElement **first) {
         return 0;
     }
     
-    return 1;
+    return -1;
     
-}
+}//-1
 
 /*
  * Remove the element at the specified position.
@@ -216,7 +218,7 @@ int LLRemoveAtPosition(LLElement **first, int position) {
         return 0;
     }
     return -1;
-}
+}  //-1
 
 /*
  * Empties the list.
@@ -227,6 +229,7 @@ int LLEmptyList(LLElement **first) {
     
     
     LLElement *elimina;
+    
     while(*first != NULL) {
         elimina = *first;
         *first = (*first)->next;
